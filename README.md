@@ -24,23 +24,23 @@ The goal of this project is to achieve 3D reconstruction of real-world images co
 
 ### Implementation Details Include:
 Generating Images with Pose Information using colmap:  
-Utilize colmap to generate images that include pose information.  
+-Utilize colmap to generate images that include pose information.  
   
 Sampling Rays from Images (Pixels) using rays_util.py:  
-Extract rays (with starting point O and direction d) from the images.  
+-Extract rays (with starting point O and direction d) from the images.  
   
 Position Encoding in model.py:  
-Perform position encoding by transforming inputs into high-dimensional space using sine and cosine functions.  
-Create the NeRF model MLP architecture to output predicted density sigma and color RGB.  
+-Perform position encoding by transforming inputs into high-dimensional space using sine and cosine functions.  
+-Create the NeRF model MLP architecture to output predicted density sigma and color RGB.  
 
 Sampling and Real Coordinate Acquisition in render.py:  
-Perform sampling along the rays to obtain real coordinates.  
-The stratified method initially samples points along the ray, while the hierarchical method performs secondary fine sampling in regions with larger weights by calculating the cumulative distribution function (CDF). 
+-Perform sampling along the rays to obtain real coordinates.  
+-The stratified method initially samples points along the ray, while the hierarchical method performs secondary fine sampling in regions with larger weights by calculating the cumulative distribution function (CDF). 
 Post-processing of Network Output in raw2outputs:  
-Calculate weights based on the network output and transform the color map and depth map of each ray.  
+-Calculate weights based on the network output and transform the color map and depth map of each ray.  
 
 Main Program nerf.ipynb:  
-Contains parameter settings and training steps, with psnr (mse) as the evaluation metric.  
+-Contains parameter settings and training steps, with psnr (mse) as the evaluation metric.  
   
 ### Undeveloped Parts before 6/21
 Loading and testing real-world data on the network.  
