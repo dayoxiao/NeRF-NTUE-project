@@ -3,10 +3,10 @@
 ## Architecture
 
 ```
-nerf.ipynb.......main python file  
-  --rays_util.py  
-  --model.py  
-  --render.py
+nerf.ipynb.........main python file  
+  --rays_util.py...sample rays  
+  --model.py.......NN structure  
+  --render.py......sample points & ouput
 ```
 
 ## Showcase
