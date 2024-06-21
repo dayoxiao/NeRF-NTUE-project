@@ -65,6 +65,9 @@ nerf.ipynb.........main python training file
 
 ## Showcase
 
+Original image:
+![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/yo_dev/pics/original_img.png)
+
 Step Training:  
 ![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/yo_dev/pics/showcase.gif)
 
