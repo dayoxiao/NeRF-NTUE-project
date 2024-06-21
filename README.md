@@ -37,7 +37,7 @@ Sampling and Real Coordinate Acquisition in render.py:
 --Perform sampling along the rays to obtain real coordinates.  
 --The stratified method initially samples points along the ray, while the hierarchical method performs secondary fine sampling in regions with larger weights by calculating the cumulative distribution function (CDF).  
 Post-processing of Network Output in raw2outputs:  
---Calculate weights based on the network output and transform the color map and depth map of each ray.  
+--Calculate weights based on the network output and transform to the color map and depth map.  
 
 Main Program nerf.ipynb:  
 --Contains parameter settings and training steps, with psnr (mse) as the evaluation metric.  
