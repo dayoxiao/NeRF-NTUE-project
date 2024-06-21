@@ -2,12 +2,12 @@
 
 ## Architecture
 
-'''
+```
 nerf.ipynb.......main python file  
   --rays_util.py  
   --model.py  
   --render.py
-'''
+```
 
 ## Showcase
 
