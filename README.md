@@ -50,10 +50,17 @@ Confirming the ability to generate 360-degree views and extracting mesh.
 ## Architecture
 
 ```
-nerf.ipynb.........main python file  
-  --rays_util.py...sample rays  
-  --model.py.......NN structure  
+nerf.ipynb.........main python training file  
+  --rays_util.py...sample rays
+    --get_rays
+  --model.py.......NN structure
+    --PositionalEncoder
+    --NeRF
   --render.py......sample points & ouput
+    --sample_stratified
+    --raw2outputs
+    --sample_pdf
+    --sample_hierarchical
 ```
 
 ## Showcase
