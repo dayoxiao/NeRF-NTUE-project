@@ -19,6 +19,13 @@ render.py 在射線上進行採樣並得到真實座標，stratified從射線上
 對網路的query生成多視圖，影片或gif輸出等  
 360度視角生成能力確認，mesh抽取  
 
+### 7/17更新
+make_dataset.ipynb 製作dataset
+進行影片切割成圖片，並將圖片縮小8倍
+透過colmap生成圖片位資，並轉成llff格式資料集
+
+load_llff.py 將llff格式資料集載入
+
 ### Project Objective
 The goal of this project is to achieve 3D reconstruction of real-world images containing multi-view information using the NeRF model, enabling arbitrary new view synthesis of the scene.
 
