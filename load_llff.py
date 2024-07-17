@@ -1,8 +1,6 @@
 import numpy as np
 import os, imageio
 
-#設路徑用
-project_name = ''
 
 def _load_data(basedir, factor, load_imgs=True):
   poses_arr = np.load(os.path.join(basedir, 'poses_bounds.npy'))
@@ -212,8 +210,3 @@ def load_llff_data(basedir, factor=8, recenter=True, bd_factor=0.75, spherify=Fa
   images = images.astype(np.float32)
   poses = poses.astype(np.float32)
   return images, poses, bds, render_poses, i_test
-
-data_dir = project_name
-
-images, poses, bds, render_poses, i_test = load_llff_data(data_dir, factor=8, recenter=True, bd_factor=.75, spherify=False)
-print(images, poses, bds, render_poses, i_test)
