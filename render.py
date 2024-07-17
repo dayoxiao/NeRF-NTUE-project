@@ -1,4 +1,5 @@
 import torch
+from torch import nn
 
 def sample_stratified(
   rays_o: torch.Tensor,
