@@ -37,6 +37,8 @@ load_llff.py 將llff格式資料集載入
 未完成部分:
 1. 結果測試及檢驗。
 
+---------------------------------------
+
 ### Project Objective
 The goal of this project is to achieve 3D reconstruction of real-world images containing multi-view information using the NeRF model, enabling arbitrary new view synthesis of the scene.
 
