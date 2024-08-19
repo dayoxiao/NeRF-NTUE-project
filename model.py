@@ -80,10 +80,12 @@ class NeRF(nn.Module):
   def forward(
     self,
     x: torch.Tensor,
-    viewdirs: torch.Tensor = None
+    viewdirs: torch.Tensor = None,
+    sigma_only=False
   ):
     """
     Forward passing with optional view direction.
+    sigma_only: infer only sigma value.
     Return: torch.tensor
     """
     # d_viewdirs error check
@@ -98,9 +100,12 @@ class NeRF(nn.Module):
         x = torch.cat([x, x_input], dim=-1)
 
     # Output layer
+    # Sigma
+    sigma = self.sigma_out(x)
+    if sigma_only:
+      return sigma
+    
     if self.d_viewdirs is not None:
-      # Sigma
-      sigma = self.sigma_out(x)
       # RGB
       rgb_feature = self.feature_filters(x)
       cat = torch.concat([rgb_feature, viewdirs], dim=-1)

@@ -1,6 +1,11 @@
 import torch
 from torch import nn
 
+import numpy as np
+
+to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8)
+
+
 def sample_stratified(
   rays_o: torch.Tensor,
   rays_d: torch.Tensor,
@@ -89,7 +94,7 @@ def raw2outputs(
   if white_bkgd:
     rgb_map = rgb_map + (1. - weights_sum[..., None])
 
-  return rgb_map, depth_map, weights_sum, weights
+  return rgb_map, disp_map, weights_sum, weights, depth_map
 
 def sample_pdf(
   bins: torch.Tensor,
