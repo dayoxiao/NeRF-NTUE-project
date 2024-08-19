@@ -26,6 +26,17 @@ make_dataset.ipynb 製作dataset
 
 load_llff.py 將llff格式資料集載入
 
+### 8/19 更新 by:dayoxiao
+與舊檔差別更新如下:
+1. 移除訓練過程中檢驗測試圖片的步驟。因應舊程式使用llff資料同時進行訓練和檢驗會造成GPU記憶體空間不足 Out of Memory。
+2. 加入NDC(Normalized Device Coordinates)轉換，以限定near, far值在0, 1之間。優化llff forward-facing資料訓練。
+3. 加入Learning Rate Decay優化訓練結果。
+4. 修改訓練迴圈並加入儲存模型Checkpoint的功能，現在可以暫停後繼續訓練以及儲存最終結果供後續測試調整。
+5. 修正載入資料程式碼上錯誤分割取址，導致圖片複用造成的訓練結果不佳問題。
+
+未完成部分:
+1. 結果測試及檢驗。
+
 ### Project Objective
 The goal of this project is to achieve 3D reconstruction of real-world images containing multi-view information using the NeRF model, enabling arbitrary new view synthesis of the scene.
 
