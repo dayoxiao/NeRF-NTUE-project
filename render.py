@@ -1,8 +1,10 @@
 import torch
 from torch import nn
+
 import numpy as np
 
 to8b = lambda x : (255*np.clip(x,0,1)).astype(np.uint8)
+
 
 def sample_stratified(
   rays_o: torch.Tensor,
