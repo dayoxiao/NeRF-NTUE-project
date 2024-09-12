@@ -37,6 +37,11 @@ load_llff.py 將llff格式資料集載入
 未完成部分:
 1. 結果測試及檢驗。
 
+### 9/13 更新 by:Lanlu
+成功使用製作的資料集對模型做測試。
+發財樹資料集訓練10000回合，PSNR如下
+![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/main/test_psnr.jpg)
+
 ---------------------------------------
 
 ### Project Objective
