@@ -42,6 +42,9 @@ load_llff.py 將llff格式資料集載入
 發財樹資料集訓練10000回合，PSNR如下
 ![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/main/test_psnr.jpg)
 
+### 11/16 更新 by:dayoxiao
+增加檔案eval，用以渲染彩色圖等最終成果。
+
 ---------------------------------------
 
 ### Project Objective
