@@ -1,18 +1,144 @@
+
 # NTUE NeRF Implementation
 
-### 此專案目標為，將含多視角資訊的現實圖片，以NeRF模型進行三維重建實踐，實現場景的任意新視角合成。  
-### 實踐內容包含：  
-透過colmap生成含位姿訊息的圖片資料。  
   
+
+### 此專案目標為，將含多視角資訊的現實圖片，以NeRF模型進行三維重建實踐，實現場景的任意新視角合成及模型抽取。
+
+### 實踐內容包含：
+
+透過colmap生成含位姿訊息的圖片資料。
+
 以rays_util.py 從圖像（像素）進行射線（起點O和方向d）採樣。
-  
+
 model.py 進行位置編碼，將輸入透過sin, cos進行高維空間轉換。創建NeRF模型MLP架構，得以輸出預測密度sigma和顏色RGB。
-  
-render.py 在射線上進行採樣並得到真實座標，stratified從射線上初次得到採樣點，hierarchical則為透過計算累積分布函數（cdf)以weights比較大的區域進行二次精細採樣。
-  
-其中網絡輸出結果後處理raw2outputs，以網路輸出結果進行權重weight計算，並且轉化每條射線的顏色圖和深度圖。
-  
+
+render.py 在射線上進行採樣並得到真實座標，stratified從射線上初次得到採樣點，hierarchical則為透過計算累積分布函數(cdf)以weights比較大的區域進行二次精細採樣。
+
+其中網絡輸出結果後處理raw2outputs，以網路輸出結果進行權重weight計算，並且轉化每條射線的顏色和深度。
+
 主程式nerf.ipynb含參數設定及訓練步驟，以psnr(mse)為指標。
+
+  
+
+檢視程式eval.ipynb可供檢視測試及生成連續的彩色圖(RGB)以及深度圖(depth)。
+
+  
+
+若訓練場景為360度環視，則可以用extract_mesh.ipynb進行模型抽取。
+
+  
+
+# Installation
+
+  
+
+## Hardware
+
+  
+
+* OS: Windows 10
+
+* Tested with NVIDIA GPU RTX3050 with **CUDA>=11.8**
+
+  
+
+## Software
+
+  
+
+* Setup Environment using anaconda is recommended
+
+* This repo is test on Python=3.10
+
+* Install other Python libraries by:
+
+  
+
+```
+
+git clone https://github.com/dayoxiao/NeRF-NTUE-project
+
+cd NeRF-NTUE-project
+
+pip install -r requirements.txt
+
+```
+# Data Preprocessing
+
+
+
+# Training
+
+To start traning NeRF network after processing your raw data, put the output folder under the main NeRF-NTUE-project folder.
+
+Currently in this repo, There are two type of scene you can train:
+
+
+* [LLFF Forward Facing](#LLFF-Forward-Facing) 
+
+* [LLFF 360 Inward Facing](#LLFF-360-Inward-Facing) 
+
+
+## LLFF-Forward Facing
+
+Take dataset name `fern` as example.
+
+If your dataset is forward facing, change hyperparameters inside `nerf_train.ipynb` to following value:
+
+```
+expname = "fern_example"	#Your custom experiment name
+data_dir = "./fern"			#Dataset directory
+spherify = False
+use_ndc = True
+
+# Optional changes
+factor = 0					# Load down scaled image, default not.
+chunksize = 1024			# Modify as needed to fit in GPU memory.
+display_rate = 100			# Frequency of displaying psnr value by iteration
+save_rate = 1000			# Frequency of saving model weight by iteration.
+
+```
+
+## LLFF-360 Inward Facing
+
+Take dataset name `mic` as example.
+
+If your dataset is forward facing, change hyperparameters inside `nerf_train.ipynb` to following value:
+
+```
+expname = "mic_example"		#Your custom experiment name
+data_dir = "./mic"			#Dataset directory
+spherify = True
+use_ndc = False
+
+# Optional changes
+factor = 4					# Load down scaled image, default is 4.
+chunksize = 1024			# Modify as needed to fit in GPU memory.
+display_rate = 100			# Frequency of displaying psnr value by iteration
+save_rate = 1000			# Frequency of saving model weight by iteration.
+
+```
+
+# Evaluation
+After training NeRF network, you should find several weight ckpts save under `./log/expname`.
+
+In `eval.ipynb`, we reload these weight to generate synthetic views of RGB graph and depth graph.
+
+To do so, make sure the hyperparameters inside `eval.ipynb` is the same as your training process in `nerf_train.ipynb`.
+
+Furthermore, if needed,  you could change the `render_factor`  for faster downscale sampling output.
+
+![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/yo_dev/pics/parrotnplate.gif)
+
+# Mesh Extraction
+Finally, If your scene is train in  LLFF-360 Inward Facing, you could try out `extract_mesh.ipynb` for reconstruction of 3D mesh.
+
+Again, make sure model hyperparameters inside `extract_mesh.ipynb` is exact same as your training process in `nerf_train.ipynb`.
+
+Then, follow the comment instruction inside the file to find the exact tight bounds for your scene to get the reconstruct result. You could export your work if needed.
+
+![image](https://github.com/dayoxiao/NeRF-NTUE-project/blob/yo_dev/pics/parrot_mesh.png)
 
 ### 6/21未開發部分
 自己的現實資料載入網路測試  
@@ -44,6 +170,10 @@ load_llff.py 將llff格式資料集載入
 
 ### 11/16 更新 by:dayoxiao
 增加檔案eval，用以渲染彩色圖等最終成果。
+
+### 11/25 更新 by:dayoxiao
+新增檔案extract_mesh 現在可以進行3D模型抽取了。
+eval檔除了rgb圖現在還會產生depth圖。
 
 ---------------------------------------
 
